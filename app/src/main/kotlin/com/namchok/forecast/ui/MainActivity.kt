@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui
+package com.namchok.forecast.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -23,19 +23,18 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import com.namchok.forecast.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
-import com.namchok.forecast-android.ui.theme.MyApplicationTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             MyApplicationTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.background,
                 ) {
                     MainNavigation()
                 }

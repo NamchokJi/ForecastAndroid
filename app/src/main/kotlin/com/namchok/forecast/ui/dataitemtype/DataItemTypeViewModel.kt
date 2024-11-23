@@ -14,42 +14,36 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui.dataitemtype
+package com.namchok.forecast.ui.dataitemtype
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.namchok.forecast.data.repository.MainApiRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import com.namchok.forecast-android.data.DataItemTypeRepository
-import com.namchok.forecast-android.ui.dataitemtype.DataItemTypeUiState.Error
-import com.namchok.forecast-android.ui.dataitemtype.DataItemTypeUiState.Loading
-import com.namchok.forecast-android.ui.dataitemtype.DataItemTypeUiState.Success
 import javax.inject.Inject
 
 @HiltViewModel
-class DataItemTypeViewModel @Inject constructor(
-    private val dataItemTypeRepository: DataItemTypeRepository
-) : ViewModel() {
-
-    val uiState: StateFlow<DataItemTypeUiState> = dataItemTypeRepository
-        .dataItemTypes.map<List<String>, DataItemTypeUiState>(::Success)
-        .catch { emit(Error(it)) }
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
-
-    fun addDataItemType(name: String) {
-        viewModelScope.launch {
-            dataItemTypeRepository.add(name)
-        }
+class DataItemTypeViewModel
+    @Inject
+    constructor(
+        private val mainApiRepository: MainApiRepository,
+    ) : ViewModel() {
+//        val uiState: StateFlow<DataItemTypeUiState> =
+//            dataItemTypeRepository
+//                .dataItemTypes.map<List<String>, DataItemTypeUiState>(::Success)
+//                .catch { emit(Error(it)) }
+//                .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), Loading)
+//
+//        fun addDataItemType(name: String) {
+//            viewModelScope.launch {
+//                dataItemTypeRepository.add(name)
+//            }
+//        }
     }
-}
 
 sealed interface DataItemTypeUiState {
     object Loading : DataItemTypeUiState
+
     data class Error(val throwable: Throwable) : DataItemTypeUiState
+
     data class Success(val data: List<String>) : DataItemTypeUiState
 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui.theme
+package com.namchok.forecast.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

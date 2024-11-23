@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui.dataitemtype
+package com.namchok.forecast.ui.dataitemtype
 
-import com.namchok.forecast-android.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,34 +35,38 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.namchok.forecast.ui.theme.MyApplicationTheme
 
 @Composable
-fun DataItemTypeScreen(modifier: Modifier = Modifier, viewModel: DataItemTypeViewModel = hiltViewModel()) {
-    val items by viewModel.uiState.collectAsStateWithLifecycle()
-    if (items is DataItemTypeUiState.Success) {
-        DataItemTypeScreen(
-            items = (items as DataItemTypeUiState.Success).data,
-            onSave = viewModel::addDataItemType,
-            modifier = modifier
-        )
-    }
+fun DataItemTypeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: DataItemTypeViewModel = hiltViewModel(),
+) {
+//    val items by viewModel.uiState.collectAsStateWithLifecycle()
+//    if (items is DataItemTypeUiState.Success) {
+//        DataItemTypeScreen(
+//            items = (items as DataItemTypeUiState.Success).data,
+//            onSave = viewModel::addDataItemType,
+//            modifier = modifier,
+//        )
+//    }
 }
 
 @Composable
 internal fun DataItemTypeScreen(
     items: List<String>,
     onSave: (name: String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier) {
         var nameDataItemType by remember { mutableStateOf("Compose") }
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             TextField(
                 value = nameDataItemType,
-                onValueChange = { nameDataItemType = it }
+                onValueChange = { nameDataItemType = it },
             )
 
             Button(modifier = Modifier.width(96.dp), onClick = { onSave(nameDataItemType) }) {

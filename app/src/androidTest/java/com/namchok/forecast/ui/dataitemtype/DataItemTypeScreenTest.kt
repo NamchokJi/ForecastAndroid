@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui.dataitemtype
+package com.namchok.forecast.ui.dataitemtype
 
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -31,7 +31,6 @@ import org.junit.runner.RunWith
  */
 @RunWith(AndroidJUnit4::class)
 class DataItemTypeScreenTest {
-
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 

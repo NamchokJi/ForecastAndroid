@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui
+package com.namchok.forecast.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.namchok.forecast-android.ui.dataitemtype.DataItemTypeScreen
+import com.namchok.forecast.ui.dataitemtype.DataItemTypeScreen
 
 @Composable
 fun MainNavigation() {

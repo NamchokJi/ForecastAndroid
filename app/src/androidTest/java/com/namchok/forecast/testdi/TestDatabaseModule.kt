@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.testdi
+package com.namchok.forecast.testdi
 
+import com.namchok.forecast.data.DataItemTypeRepository
+import com.namchok.forecast.data.di.DataModule
+import com.namchok.forecast.data.di.FakeDataItemTypeRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
-import com.namchok.forecast-android.data.DataItemTypeRepository
-import com.namchok.forecast-android.data.di.DataModule
-import com.namchok.forecast-android.data.di.FakeDataItemTypeRepository
 
 @Module
 @TestInstallIn(
     components = [SingletonComponent::class],
-    replaces = [DataModule::class]
+    replaces = [DataModule::class],
 )
 interface FakeDataModule {
-
     @Binds
-    abstract fun bindRepository(
-        fakeRepository: FakeDataItemTypeRepository
-    ): DataItemTypeRepository
+    abstract fun bindRepository(fakeRepository: FakeDataItemTypeRepository): DataItemTypeRepository
 }

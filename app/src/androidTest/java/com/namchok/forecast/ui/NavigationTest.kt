@@ -14,19 +14,18 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast-android.ui
+package com.namchok.forecast.ui
 
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithText
+import com.namchok.forecast.data.di.fakeDataItemTypes
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
-import com.namchok.forecast-android.data.di.fakeDataItemTypes
 
 @HiltAndroidTest
 class NavigationTest {
-
     @get:Rule(order = 0)
     var hiltRule = HiltAndroidRule(this)
 
@@ -39,4 +38,3 @@ class NavigationTest {
         composeTestRule.onNodeWithText(fakeDataItemTypes.first(), substring = true).assertExists()
     }
 }
-

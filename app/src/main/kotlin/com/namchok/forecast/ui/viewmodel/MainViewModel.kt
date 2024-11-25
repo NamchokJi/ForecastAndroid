@@ -27,10 +27,6 @@ import kotlinx.coroutines.flow.onStart
 class MainViewModel(
     val usecase: MappingForecastDetailUseCase,
 ) : BaseViewModel<ForecastDetailModel>() {
-    fun initDefault() {
-//        search("Bangkok")
-    }
-
     fun search(city: String) {
         usecase.execute(city = city)
             .onStart {

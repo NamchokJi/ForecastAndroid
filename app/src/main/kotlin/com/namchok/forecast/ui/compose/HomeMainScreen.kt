@@ -77,7 +77,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeMainScreen() {
     val viewModel = koinViewModel<MainViewModel>()
-    viewModel.initDefault()
     val uiState by viewModel.uiState.collectAsState()
 
     HomeScreen(

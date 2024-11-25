@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.namchok.forecast.ui.dataitemtype
+package com.namchok.forecast.ui.compose
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

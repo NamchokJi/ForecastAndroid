@@ -20,7 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.namchok.forecast.ui.dataitemtype.HomeMainScreen
+import com.namchok.forecast.ui.compose.HomeMainScreen
 
 @Composable
 fun MainNavigation() {

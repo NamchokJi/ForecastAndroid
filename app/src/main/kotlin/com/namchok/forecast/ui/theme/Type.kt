@@ -59,4 +59,8 @@ val Typography =
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
             ),
+        headlineLarge = baseTypography.copy(
+            fontWeight = FontWeight.Bold,
+            fontSize = 124.sp,
+        ),
     )

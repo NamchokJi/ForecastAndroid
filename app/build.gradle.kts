@@ -82,6 +82,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.adaptive.android)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
@@ -121,6 +122,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material.icon)
     implementation(libs.coil.compose)
+    implementation(libs.androidx.material3.window.size)
     // Tooling
     debugImplementation(libs.androidx.compose.ui.tooling)
     // Instrumented tests

@@ -43,6 +43,7 @@ import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -63,11 +64,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
+import androidx.compose.ui.tooling.preview.Devices.TABLET
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.window.core.layout.WindowWidthSizeClass
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.namchok.forecast.domain.model.ForecastDetailModel
+import com.namchok.forecast.domain.model.MainModel
+import com.namchok.forecast.domain.model.WindModel
 import com.namchok.forecast.ui.theme.Typography
 import com.namchok.forecast.ui.viewmodel.BaseUiState
 import com.namchok.forecast.ui.viewmodel.MainViewModel
@@ -96,6 +102,9 @@ private fun HomeScreen(
 ) {
     var search by remember { mutableStateOf("") }
     val listColors = listOf(Color(0xFF62cff4), Color(0xFF2c67f2))
+//    val configuration = LocalConfiguration.current
+//    val screenWidth = configuration.screenWidthDp.dp
+    val windowSizeClass: WindowWidthSizeClass = currentWindowAdaptiveInfo().windowSizeClass.windowWidthSizeClass
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
@@ -123,7 +132,14 @@ private fun HomeScreen(
 
                         is BaseUiState.Success -> {
                             if (uiState.data != null) {
-                                DetailScreen(uiState.data)
+                                when (windowSizeClass) {
+                                    WindowWidthSizeClass.COMPACT -> {
+                                        DetailScreenMobile(uiState.data)
+                                    }
+                                    else -> {
+                                        DetailScreenTablet(uiState.data)
+                                    }
+                                }
                             } else {
                                 BaseScreen()
                             }
@@ -193,7 +209,7 @@ private fun BaseScreen() {
 }
 
 @Composable
-private fun DetailScreen(data: ForecastDetailModel) {
+private fun DetailScreenMobile(data: ForecastDetailModel) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -287,6 +303,106 @@ private fun DetailScreen(data: ForecastDetailModel) {
 }
 
 @Composable
+private fun DetailScreenTablet(data: ForecastDetailModel) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround,
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column {
+                Text(
+                    text = data.name,
+                    style = Typography.titleMedium,
+                )
+                AsyncImage(
+                    model =
+                        ImageRequest.Builder(LocalContext.current)
+                            .data(
+                                String.format(
+                                    stringResource(id = R.string.url_icon_weather),
+                                    data.weather.icon,
+                                ),
+                            )
+                            .build(),
+                    contentDescription = null,
+                    placeholder = painterResource(R.drawable.ic_cloud_place_holder),
+                    error = painterResource(R.drawable.ic_load_image_error),
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier.size(200.dp),
+                )
+            }
+            Column {
+                Text(
+                    text = data.dt,
+                    style = Typography.titleMedium,
+                )
+                Text(
+                    text = data.weather.main,
+                    style = Typography.titleMedium,
+                )
+                Text(
+                    text =
+                        String.format(
+                            stringResource(id = R.string.label_temp_celcius),
+                            data.main.temp,
+                        ),
+                    style = Typography.headlineLarge,
+                )
+            }
+        }
+
+        HorizontalDivider()
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+        ) {
+            SubDetailView(
+                data =
+                    String.format(
+                        stringResource(id = R.string.label_wind_speed_value),
+                        data.wind.speed,
+                    ),
+                icon = Icons.Filled.Air,
+                type = stringResource(R.string.label_wind_speed_title),
+            )
+            SubDetailView(
+                data =
+                    String.format(
+                        stringResource(id = R.string.label_humid_value),
+                        data.main.humidity,
+                    ),
+                icon = Icons.Filled.WaterDrop,
+                type = stringResource(R.string.label_humid_title),
+            )
+            SubDetailView(
+                data =
+                    String.format(
+                        stringResource(id = R.string.label_temp_ranged_value),
+                        data.main.tempMin,
+                        data.main.tempMax,
+                    ),
+                icon = Icons.Filled.Thermostat,
+                type = stringResource(R.string.label_temp_ranged_title),
+            )
+            SubDetailView(
+                data =
+                    String.format(
+                        stringResource(id = R.string.label_pressure_value),
+                        data.main.pressure,
+                    ),
+                icon = Icons.Filled.Compress,
+                type = stringResource(R.string.label_pressure_title),
+            )
+        }
+    }
+}
+
+@Composable
 private fun SubDetailView(
     data: String,
     icon: ImageVector,
@@ -349,7 +465,11 @@ fun SearchView(
     }
 }
 
-@Preview
+@Preview(name = "Landscape Mode", showBackground = true, device = Devices.TABLET)
+@Preview(name = "Portrait Mode", showBackground = true, device = Devices.PIXEL_7A)
+annotation class OrientationPreviews
+
+@OrientationPreviews
 @Composable
 private fun MainScreenPreview() {
     HomeScreen(
@@ -358,6 +478,19 @@ private fun MainScreenPreview() {
                 data =
                     ForecastDetailModel(
                         name = "London",
+                        dt = "25 November 2024",
+                        wind =
+                            WindModel(
+                                speed = "1",
+                            ),
+                        main =
+                            MainModel(
+                                temp = "30",
+                                tempMin = "30",
+                                tempMax = "30",
+                                pressure = "500",
+                                humidity = "500",
+                            ),
                     ),
             ),
         onSearch = {},

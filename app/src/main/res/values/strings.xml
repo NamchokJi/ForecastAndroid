@@ -1,19 +1,17 @@
-<!--
-  ~ Copyright (C) 2022 The Android Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <resources>
-    <string name="app_name">[Forecast</string>
+    <string name="app_name">Forecast Android</string>
+
+    <!--Main Screen-->
+    <string name="label_base_screen">Enter the name of a city\nto get its weather forecast.</string>
+    <string name="label_error_screen">API Error or city name is not found.</string>
+    <string name="label_temp_celcius">%1$s°</string>
+    <string name="url_icon_weather">http://openweathermap.org/img/wn/%1$s@4x.png</string>
+    <string name="label_wind_speed_title">Wind</string>
+    <string name="label_wind_speed_value">%1$s km/h</string>
+    <string name="label_humid_title">Humidity</string>
+    <string name="label_humid_value">%1$s \%%</string>
+    <string name="label_temp_ranged_title">Min - Max</string>
+    <string name="label_temp_ranged_value">%1$s° - %2$s°</string>
+    <string name="label_pressure_title">Pressure</string>
+    <string name="label_pressure_value">%1$s hPa</string>
 </resources>

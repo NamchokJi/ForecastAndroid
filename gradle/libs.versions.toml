@@ -21,6 +21,10 @@ logging-interceptor = "4.10.0"
 chucker = "3.5.2"
 secret = "0.2.1"
 coil-compose = "2.6.0"
+mock = "1.13.3"
+turbine = "1.1.0"
+core-test = "2.2.0"
+jupiter = "5.9.3"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -63,6 +67,13 @@ chucker-debug = { group = "com.github.chuckerteam.chucker", name = "library", ve
 
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+
+mockk = { module = "io.mockk:mockk-android", version.ref = "mock" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+arch-core-test = { module = "androidx.arch.core:core-testing", version.ref = "core-test" }
+jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "jupiter" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

@@ -9,5 +9,6 @@ interface MainApiInterface {
     @GET("data/2.5/weather")
     suspend fun getCityForecast(
         @Query("q") city: String,
+        @Query("units") units: String = "metric",
     ): Response<ForecastDataResponse>
 }

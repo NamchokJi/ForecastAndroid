@@ -1,7 +1,7 @@
 Forecast Android Application
 ==================
 ## Demo
-![]([https://github.com/Your_Repository_Name/Your_GIF_Name.gif](https://github.com/NamchokJi/ForecastAndroid/blob/master/demo_application.gif))
+![](https://github.com/NamchokJi/ForecastAndroid/blob/master/demo_application.gif)
 
 ## Features
 * ViewModel
